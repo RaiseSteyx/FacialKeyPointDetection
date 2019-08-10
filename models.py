@@ -1,4 +1,5 @@
 ## TODO: define the convolutional neural network architecture
+# %config IPCompleter.greedy=True
 
 import torch
 import torch.nn as nn
@@ -6,9 +7,7 @@ import torch.nn.functional as F
 # can use the below import should you choose to initialize the weights of your Net
 import torch.nn.init as I
 
-
 class Net(nn.Module):
-
     def __init__(self):
         super(Net, self).__init__()
         
@@ -36,7 +35,8 @@ class Net(nn.Module):
         self.drop2 = nn.Dropout(0.2)
         self.drop3 = nn.Dropout(0.3)
         self.drop4 = nn.Dropout(0.4)
-
+        self.drop5 = nn.Dropout(0.5)
+        self.drop6 = nn.Dropout(0.6)
         
     def forward(self, x):
         ## TODO: Define the feedforward behavior of this model
@@ -55,12 +55,12 @@ class Net(nn.Module):
 #         x = x.view(x.size(0), -1)
         
         # one linear layer
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = F.relu(self.fc3(x))
+        x = self.drop5(F.relu(self.fc1(x)))
+        x = self.drop6(F.relu(self.fc2(x)))
+        x = self.fc3(x)
     
         # a softmax layer to convert the 10 outputs into a distribution of class scores
-        x = F.log_softmax(x, dim=1)
+#         x = F.log_softmax(x, dim=1)
         
         # a modified x, having gone through all the layers of your model, should be returned
         return x
