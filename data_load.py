@@ -29,10 +29,8 @@ class FacialKeypointsDataset(Dataset):
     def __getitem__(self, idx):
         image_name = os.path.join(self.root_dir,
                                 self.key_pts_frame.iloc[idx, 0])
-        print(image_name)
         
         image = mpimg.imread(image_name)
-#         plt.imshow(image)
         
         # if image has an alpha color channel, get rid of it
         if(image.shape[2] == 4):
@@ -61,10 +59,7 @@ class Normalize(object):
         key_pts_copy = np.copy(key_pts)
 
         # convert image to grayscale
-#         print(image.size())
-#         plt.imshow(image)
         image_copy = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-        plt.imshow(image_copy)
         
         # scale color range from [0, 255] to [0, 1]
         image_copy=  image_copy/255.0
