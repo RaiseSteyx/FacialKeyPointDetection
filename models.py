@@ -23,7 +23,7 @@ class Net(nn.Module):
         self.conv4 = nn.Conv2d(128, 256, 1)
 
         # Maxpooling Layer
-        self.pool = nn.MaxPool2d(kernel_size = 2, stride = 2)
+        self.pool = nn.MaxPool2d(kernel_size = 2, stride = 2, padding = 0)
 
         # Fully Connected Layers
         self.fc1 = nn.Linear(6400, 1000)
@@ -52,7 +52,6 @@ class Net(nn.Module):
         # prep for linear layer
         # flatten the inputs into a vector
         x = x.view(x.size(0), -1)
-#         x = x.view(x.size(0), -1)
         
         # one linear layer
         x = self.drop5(F.relu(self.fc1(x)))
